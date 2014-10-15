@@ -19,7 +19,7 @@ public class OrdersTester {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource service = client.resource(getBaseURI());
-		// Create one order
+/*		// Create one order
 		Order o = new Order("3", "Long Black", "3.20");
 		ClientResponse response = service.path("rest").path("orders")
 				.path(o.getId()).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, o);
@@ -38,13 +38,18 @@ public class OrdersTester {
 		System.out.println(service.path("rest").path("orders").accept(
 				MediaType.APPLICATION_XML).get(String.class));
 		
-		
+		*/
+		//Get orders/1
+				System.out.println(service.path("rest").path("orders/1").accept(
+						MediaType.APPLICATION_XML).get(String.class));
+				
+				
 		// Create a Order with FORM (POST - note the mapping between params and ...
 		Form form = new Form();
-		form.add("id", "4");
+		form.add("id", "2");
 		form.add("coffeetype", "Espresso");
-		form.add("cost", "2.90");
-		response = service.path("rest").path("orders").type(MediaType.APPLICATION_FORM_URLENCODED)
+		form.add("cost", "3.90");
+		ClientResponse response = service.path("rest").path("orders").type(MediaType.APPLICATION_FORM_URLENCODED)
 								   .post(ClientResponse.class, form);
 		System.out.println("Form response " + response.getEntity(String.class));
 
