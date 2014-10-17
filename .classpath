@@ -14,5 +14,6 @@
 	<classpathentry kind="lib" path="jersey-lib/jersey-servlet-1.18.jar"/>
 	<classpathentry kind="lib" path="jersey-lib/jettison-1.1.jar"/>
 	<classpathentry kind="lib" path="jersey-lib/jsr311-api-1.1.1.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/CoffeeService"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

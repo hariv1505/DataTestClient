@@ -11,7 +11,6 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
-import com.thegs.coffeeapp.model.Order;
 
 
 public class OrdersTester {
@@ -39,16 +38,16 @@ public class OrdersTester {
 				MediaType.APPLICATION_XML).get(String.class));
 		
 		*/
-		//Get orders/1
-				System.out.println(service.path("rest").path("orders/1").accept(
+		
+		// Get all orders
+				System.out.println(service.path("rest").path("orders").accept(
 						MediaType.APPLICATION_XML).get(String.class));
-				
 				
 		// Create a Order with FORM (POST - note the mapping between params and ...
 		Form form = new Form();
-		form.add("id", "2");
-		form.add("coffeetype", "Espresso");
-		form.add("cost", "3.90");
+		form.add("id", "4");
+		form.add("coffeetype", "Cappuccino");
+		form.add("cost", "3.00");
 		ClientResponse response = service.path("rest").path("orders").type(MediaType.APPLICATION_FORM_URLENCODED)
 								   .post(ClientResponse.class, form);
 		System.out.println("Form response " + response.getEntity(String.class));
