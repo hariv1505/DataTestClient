@@ -2,8 +2,11 @@ package com.thegs.coffeeapp.client;
 
 import java.net.URI;
 
+import javax.swing.text.html.parser.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
@@ -11,6 +14,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
+import com.thegs.coffeeapp.model.Order;
 
 
 public class OrdersTester {
@@ -19,7 +23,7 @@ public class OrdersTester {
 		Client client = Client.create(config);
 		WebResource service = client.resource(getBaseURI());
 /*		// Create one order
-		Order o = new Order("3", "Long Black", "3.20");
+		Order o = new Order("4", "Long Black", "3.20");
 		ClientResponse response = service.path("rest").path("orders")
 				.path(o.getId()).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, o);
 		// Return code should be 201 == created resource
@@ -39,19 +43,26 @@ public class OrdersTester {
 		
 		*/
 		
-		// Get all orders
-				System.out.println(service.path("rest").path("orders").accept(
-						MediaType.APPLICATION_XML).get(String.class));
+		
+		Order o = new Order("4", "Long Black", "3.20");
+		ClientResponse response = service.path("rest").path("orders")
+				.path(o.getId()).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, o);
+		System.out.println(response.getStatus());
+		
+	//	service.path("rest").path("orders/4").accept(
+	//			MediaType.APPLICATION_XML).put(jaxbOrder);
 				
 		// Create a Order with FORM (POST - note the mapping between params and ...
-		Form form = new Form();
-		form.add("id", "4");
-		form.add("coffeetype", "Cappuccino");
+/*		Form form = new Form();
+		form.add("id", "6");
+		form.add("coffeetype", "Latte");
 		form.add("cost", "3.00");
+		form.add("additions", "Hazelnut");
 		ClientResponse response = service.path("rest").path("orders").type(MediaType.APPLICATION_FORM_URLENCODED)
 								   .post(ClientResponse.class, form);
+		System.out.println(response.getHeaders());
 		System.out.println("Form response " + response.getEntity(String.class));
-
+*/
 		
 	}
 	private static URI getBaseURI() {
