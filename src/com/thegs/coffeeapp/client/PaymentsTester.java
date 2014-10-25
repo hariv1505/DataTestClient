@@ -23,20 +23,19 @@ public class PaymentsTester {
 		Payment p = new Payment("2", "Card", "4.50");
         p.setCardDetails("123456789");
 		ClientResponse response = service.path("rest").path("payments")
-				.path(p.getId()).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, p);
+				.path(p.getId()).header("Auth", "def456")
+				.put(ClientResponse.class, p);
 		// Return code should be 201 == created resource
 		System.out.println(response.getStatus());
 
 		// Try various methods for testing the service using this client.
 		
 		//Get payments/1
-		System.out.println(service.path("rest").path("payments/1").accept(
+		System.out.println(service.path("rest").path("payments").path("1").header("Auth", "def456").accept(
 				MediaType.APPLICATION_XML).get(String.class));
-		// Delete payments/3
-		service.path("rest").path("payments/3").delete();
 		
 		// Get the all payments
-		System.out.println(service.path("rest").path("payments").accept(
+		System.out.println(service.path("rest").path("payments").header("Auth", "def456").accept(
 				MediaType.APPLICATION_XML).get(String.class));
 		
 		
@@ -45,21 +44,23 @@ public class PaymentsTester {
 		form.add("id", "4");
 		form.add("paytype", "cash");
 		form.add("amount", "2.90");
-		response = service.path("rest").path("payments").type(MediaType.APPLICATION_FORM_URLENCODED)
-								   .post(ClientResponse.class, form);
-		System.out.println("Form response " + response.getEntity(String.class));
+		response = service.path("rest").path("payments").path("4").header("Auth", "def456")
+				.type(MediaType.APPLICATION_FORM_URLENCODED)
+				.put(ClientResponse.class, form);
+		System.out.println("Form response " + response.getStatus());
 
 		form.add("id", "1");
 		form.add("paytype", "card");
 		form.add("amount", "3.70");
 		form.add("carddetails", "150589");
-		response = service.path("rest").path("payments").type(MediaType.APPLICATION_FORM_URLENCODED)
-								   .post(ClientResponse.class, form);
-		System.out.println("Form response " + response.getEntity(String.class));
+		response = service.path("rest").path("payments").path("1").header("Auth", "def456")
+				.type(MediaType.APPLICATION_FORM_URLENCODED)
+				.put(ClientResponse.class, form);
+		System.out.println("Form response " + response.getStatus());
 		
 	}
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://localhost:8080/CoffeeService").build();
+				"http://localhost:8090/CoffeeService").build();
 	}
 }
