@@ -83,6 +83,6 @@ public class OrdersTester {
 	}
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://localhost:8090/CoffeeService").build();
+				"http://localhost:8080/CoffeeService").build();
 	}
 }
