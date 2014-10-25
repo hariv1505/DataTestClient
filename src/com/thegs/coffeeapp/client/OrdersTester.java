@@ -49,19 +49,21 @@ public class OrdersTester {
 		
 		
 		Form form = new Form();
-		form.add("id", "17");
+		form.add("id", "18");
 		form.add("coffeetype", "Latte");
 		form.add("cost", "3.50");
 		form.add("additions", "Hazelnut");
-		ClientResponse response1 = service.path("rest").path("orders").type(MediaType.APPLICATION_FORM_URLENCODED)
-									.header("Auth", "ac123").post(ClientResponse.class, form);
+		ClientResponse response1 = service.path("rest").path("orders")
+				.type(MediaType.APPLICATION_FORM_URLENCODED)
+				.header("Auth", "abc123").post(ClientResponse.class, form);
 		System.out.println(response1.getHeaders());
-		System.out.println("Form response " + response1.getEntity(String.class));
+		System.out.println("Form response " + response1.getStatus());
+		//System.out.println("Form response " + response1.getEntity(String.class));
 		
 		Order o = new Order("4", "Long Black", "3.20");
 		ClientResponse response = service.path("rest").path("orders")
-				.path(o.getId()).accept(MediaType.APPLICATION_XML).put(ClientResponse.class, o);
-		System.out.println(response.getStatus());
+				.path(o.getId()).accept(MediaType.TEXT_HTML).put(ClientResponse.class, o);
+		System.out.println("Second response " + response.getStatus());
 		
 	//	service.path("rest").path("orders/4").accept(
 	//			MediaType.APPLICATION_XML).put(jaxbOrder);
@@ -81,6 +83,6 @@ public class OrdersTester {
 	}
 	private static URI getBaseURI() {
 		return UriBuilder.fromUri(
-				"http://localhost:8080/CoffeeService").build();
+				"http://localhost:8090/CoffeeService").build();
 	}
 }
