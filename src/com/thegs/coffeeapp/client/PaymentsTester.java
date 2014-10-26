@@ -24,6 +24,7 @@ public class PaymentsTester {
         p.setCardDetails("123456789");
 		ClientResponse response = service.path("rest").path("payments")
 				.path(p.getId()).header("Auth", "def456")
+				.accept(MediaType.APPLICATION_XML)
 				.put(ClientResponse.class, p);
 		// Return code should be 201 == created resource
 		System.out.println(response.getStatus());
