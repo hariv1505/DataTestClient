@@ -2,11 +2,8 @@ package com.thegs.coffeeapp.client;
 
 import java.net.URI;
 
-import javax.swing.text.html.parser.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriBuilder;
-import javax.xml.bind.JAXBElement;
-import javax.xml.namespace.QName;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
